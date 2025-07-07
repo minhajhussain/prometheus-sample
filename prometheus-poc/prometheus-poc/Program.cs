@@ -1,3 +1,5 @@
+using Prometheus;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,5 +23,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMetricServer("/metrics"); // This will expose the metrics on the mentioned url
+app.UseHttpMetrics(); // Optional: to expose default HTTP metrics
 
 app.Run();
